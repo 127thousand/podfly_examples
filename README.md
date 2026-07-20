@@ -7,32 +7,34 @@ podfly_examples/
   fly/
     api_only/           # API-only → Fly (scale-to-zero)
   render/
-    api_postgres/       # API + Render Postgres → Render
-    api_and_static/     # API + Flutter web static site → Render
+    README.md           # ★ how Render + git works (read this)
+    api_postgres/       # API + Render Postgres
+    api_and_static/     # API + Flutter web static site
   railway/              # (planned)
   digitalocean/         # (planned)
 ```
 
 Each **leaf folder** is a full Serverpod monorepo root (`podfly deploy` cwd).
 
-## Render monorepo note
+## Render (important)
 
-Render supports `rootDir` so examples need **not** live at the git root. See `render/api_postgres/podfly.yaml` (`render.root_dir`).
+Render **requires a GitHub/GitLab repo URL**. It does not deploy from a bare local folder like Fly.
+
+→ **[render/README.md](render/README.md)** — step-by-step: repo, `root_dir`, `podfly deploy`, static `site/`, secrets, teardown.
 
 ## Quick start
 
 ```bash
-# Install
 dart pub global activate podfly
 
-# Fly API-only
+# Fly API-only (local → Fly; no git URL required)
 cd fly/api_only
 podfly deploy --api --yes --smoke
 
-# Render API + Postgres (set render.repo if forking)
-cd render/api_postgres
-render login   # or RENDER_API_KEY
-podfly deploy --api --yes --smoke
+# Render (push to GitHub first, set render.repo in podfly.yaml)
+cd render/api_and_static
+render login
+podfly deploy --yes --smoke
 ```
 
 ## Official easy button
