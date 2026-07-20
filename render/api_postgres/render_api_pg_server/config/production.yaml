@@ -1,0 +1,16 @@
+apiServer:
+  port: 8080
+  publicHost: localhost
+  publicPort: 443
+  publicScheme: https
+
+database:
+  host: localhost
+  port: 5432
+  name: serverpod
+  user: postgres
+  requireSsl: true
+
+sessionLogs:
+  consoleEnabled: true
+  persistentEnabled: false

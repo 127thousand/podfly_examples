@@ -1,0 +1,36 @@
+# API-only Serverpod on Fly.io (scale-to-zero friendly).
+# Used by .github/workflows/deploy.yml — change `fly.app` to a unique name.
+#
+#   dart pub global activate podfly
+#   podfly deploy --api --yes --smoke
+#
+# CI needs secret FLY_API_TOKEN (fly tokens create deploy -x 999999h).
+
+host: fly
+mode: monolith
+name: mobile_api_only
+server: mobile_api_only_server
+flutter: mobile_api_only_flutter
+
+fly:
+  # Must be unique across all of Fly.io (DNS-style, hyphens only).
+  app: podfly-api-only-demo
+  region: iad
+  config: fly.toml
+  scale_to_zero: true
+  ha: false
+
+database:
+  # Stateless mini example — no Postgres required for /greeting/hello.
+  provider: none
+
+web:
+  enabled: false
+  api_url: https://podfly-api-only-demo.fly.dev/
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"podfly"}'
+    expect_status: 200

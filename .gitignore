@@ -1,0 +1,10 @@
+.dart_tool/
+**/build/
+**/.dart_tool/
+**/.packages
+**/.flutter-plugins*
+**/local.properties
+**/.podfly_*.json
+**/config/passwords.yaml
+**/config/*.podfly.bak
+.DS_Store

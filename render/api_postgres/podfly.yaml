@@ -1,0 +1,35 @@
+# Render API + Render Postgres (podfly_examples/render/api_postgres)
+host: render
+mode: monolith
+name: render_api_pg
+server: render_api_pg_server
+flutter: render_api_pg_flutter
+
+render:
+  service: podfly-render-api-pg
+  region: oregon
+  plan: free
+  branch: main
+  # Set after pushing this monorepo:
+  repo: https://github.com/127thousand/podfly_examples
+  root_dir: render/api_postgres
+  dockerfile_path: render_api_pg_server/Dockerfile
+
+database:
+  provider: render_postgres
+  render_postgres:
+    name: podfly-render-api-pg-db
+    create: true
+    plan: free
+    region: oregon
+
+web:
+  enabled: false
+  api_url: https://podfly-render-api-pg.onrender.com/
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"render"}'
+    expect_status: 200
