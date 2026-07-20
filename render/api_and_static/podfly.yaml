@@ -1,0 +1,37 @@
+# API (Docker web service) + Flutter web (Render static site)
+host: render
+mode: monolith
+name: render_web_demo
+server: render_web_demo_server
+flutter: render_web_demo_flutter
+
+render:
+  service: podfly-render-web-api
+  web_service: podfly-render-web-ui
+  region: oregon
+  plan: free
+  branch: main
+  repo: https://github.com/127thousand/podfly_examples
+  root_dir: render/api_and_static
+  site_dir: site
+
+database:
+  provider: none
+
+web:
+  enabled: true
+  api_url: https://podfly-render-web-api.onrender.com/
+  server_url_define: SERVER_URL
+  patch_bootstrap: true
+  write_headers: true
+  base_href: /
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"static"}'
+    expect_status: 200
+  web:
+    path: /
+    expect_status: 200

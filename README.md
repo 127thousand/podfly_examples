@@ -8,6 +8,7 @@ podfly_examples/
     api_only/           # API-only → Fly (scale-to-zero)
   render/
     api_postgres/       # API + Render Postgres → Render
+    api_and_static/     # API + Flutter web static site → Render
   railway/              # (planned)
   digitalocean/         # (planned)
 ```

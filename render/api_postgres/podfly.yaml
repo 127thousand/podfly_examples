@@ -14,7 +14,7 @@ render:
   root_dir: render/api_postgres
   dockerfile_path: render_api_pg_server/Dockerfile
   blueprint: render.yaml
-  service_id: srv-d9f78fok1i2s73binjcg
+  service_id: srv-d9f7amn7f7vs73c33gj0
   public_host: podfly-render-api-pg.onrender.com
 
 database:

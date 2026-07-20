@@ -1,0 +1,11 @@
+name: _
+publish_to: none
+
+environment:
+  sdk: '^3.10.3'
+
+workspace:
+  - render_web_demo_client
+  - render_web_demo_server
+  - render_web_demo_flutter
+
