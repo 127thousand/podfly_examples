@@ -24844,7 +24844,7 @@ break A}q=new A.rs("Unknown error, data: "+a,c)
 break A}return q},
 apd(){var s=0,r=A.Q(t.N),q
 var $async$apd=A.R(function(a,b){if(a===1)return A.N(b,r)
-for(;;)switch(s){case 0:q="https://podfly-render-api-pg.onrender.com/"
+for(;;)switch(s){case 0:q="https://podfly-render-web-api.onrender.com/"
 s=1
 break
 case 1:return A.O(q,r)}})
