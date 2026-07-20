@@ -5,11 +5,11 @@ apiServer:
   publicScheme: https
 
 database:
-  host: dpg-d9f7863rjlhs73dmilqg-a.oregon-postgres.render.com
+  host: dpg-d9f7863rjlhs73dmilqg-a
   port: 5432
   name: podfly_render_api_pg_db
   user: podfly_render_api_pg_db_user
-  requireSsl: true
+  requireSsl: false
 
 sessionLogs:
   consoleEnabled: true
