@@ -1,14 +1,14 @@
 apiServer:
   port: 8080
-  publicHost: localhost
+  publicHost: podfly-render-api-pg.onrender.com
   publicPort: 443
   publicScheme: https
 
 database:
-  host: localhost
+  host: dpg-d9f7863rjlhs73dmilqg-a.oregon-postgres.render.com
   port: 5432
-  name: serverpod
-  user: postgres
+  name: podfly_render_api_pg_db
+  user: podfly_render_api_pg_db_user
   requireSsl: true
 
 sessionLogs:
