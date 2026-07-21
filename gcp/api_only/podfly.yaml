@@ -15,7 +15,7 @@ cloud_run:
   port: 8080
   min_instances: 0
   max_instances: 3
-  public_host: podfly-gcr-api-only-xdxufg3z7q-uc.a.run.app
+  execution_environment: gen2
 
 database:
   provider: none

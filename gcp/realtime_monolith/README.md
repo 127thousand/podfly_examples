@@ -48,6 +48,7 @@ Cloud Run flags used for realtime:
 
 - `timeout_seconds: 3600` — long-lived stream requests
 - `session_affinity: true` — sticky routing when scaled > 1
+- `execution_environment: gen2` — Cloud Run 2nd gen (pinned by podfly)
 
 No Redis: single-instance in-process streams are enough for this demo.
 

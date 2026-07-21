@@ -22,6 +22,7 @@ cloud_run:
   # Long-lived WebSocket streams
   timeout_seconds: 3600
   session_affinity: true
+  execution_environment: gen2
 
 database:
   provider: none
