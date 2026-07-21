@@ -16,9 +16,10 @@ podfly_examples/
     api_only/           # API-only → Cloud Run (cheap serverless)
     realtime_monolith/  # Flutter web + API + WebSocket streams (nginx monolith)
   aws/
-    README.md
-    api_only/           # API-only → App Runner (ECR image)
-    realtime_monolith/  # Flutter web + API + WebSocket streams (nginx monolith)
+    README.md           # ★ App Runner vs ECS (WebSockets)
+    api_only/           # API-only → App Runner
+    realtime_monolith/  # Flutter + RPC on App Runner (no WS)
+    ecs_realtime/       # Flutter + RPC + WebSocket streams → ECS Fargate + ALB
   digitalocean/         # (planned)
 ```
 
@@ -33,6 +34,12 @@ Render **requires a GitHub/GitLab repo URL**. It does not deploy from a bare loc
 ## Google Cloud Run
 
 → **[gcp/README.md](gcp/README.md)** — API-only vs nginx monolith (Flutter + WebSockets).
+
+## AWS
+
+→ **[aws/README.md](aws/README.md)** — App Runner (HTTP) vs **ECS + ALB** (streams).
+
+App Runner does **not** support WebSockets. Use `aws/ecs_realtime` for Serverpod streams.
 
 ## Quick start
 
@@ -54,10 +61,10 @@ cd gcp/realtime_monolith
 podfly deploy --yes --smoke
 # when done: gcloud run services delete podfly-gcr-realtime --region us-central1 --quiet
 
-# AWS App Runner API-only
-cd aws/api_only
-podfly deploy --api --yes --smoke
-# when done: aws apprunner delete-service --service-arn … (see aws/api_only/README)
+# AWS: streams need ECS + ALB (not App Runner)
+cd aws/ecs_realtime
+podfly deploy --yes --smoke
+# when done: see aws/ecs_realtime/README teardown
 ```
 
 ## Official easy button
