@@ -15,10 +15,10 @@ Browser ──HTTPS :8080──► nginx
 1. **RPC** — `greeting.hello` (HTTP) — **works** on App Runner  
 2. **Realtime** — `tick.clock` stream (WebSocket) — **does not work on App Runner**
 
-### Why streams fail
+### Why streams fail (not an nginx config issue)
 
-App Runner’s edge proxy (**Envoy**) rejects WebSocket upgrades with **HTTP 403**
-before traffic reaches nginx/Serverpod:
+App Runner’s **managed** edge (**Envoy**) rejects WebSocket upgrades with
+**HTTP 403** *before* traffic reaches nginx/Serverpod:
 
 ```bash
 curl -i -H 'Connection: Upgrade' -H 'Upgrade: websocket' \
@@ -27,17 +27,18 @@ curl -i -H 'Connection: Upgrade' -H 'Upgrade: websocket' \
 # → HTTP/1.1 403 Forbidden  (server: envoy)
 ```
 
-AWS documents App Runner as **HTTP/1.0–1.1 request/response** with a **120s**
-request timeout — not long-lived WebSockets. The platform roadmap item for
-WebSockets was closed without native support.
+- **Envoy can** proxy WebSockets when you own the proxy (ECS/EKS).
+- **App Runner does not** expose Envoy/WS settings — no toggle on CreateService.
+- AWS docs: HTTP/1.0–1.1, **120s** request timeout, stateless request model.
+- Roadmap [Support web sockets #13](https://github.com/aws/apprunner-roadmap/issues/13): closed not planned.
 
-| Feature | Cloud Run (`gcp/realtime_monolith`) | App Runner (this example) |
-|---------|-------------------------------------|---------------------------|
-| Flutter web + RPC | ✅ | ✅ |
-| Serverpod method streams (WS) | ✅ | ❌ edge 403 |
+| Feature | Cloud Run | App Runner (this example) | ECS + ALB (planned) |
+|---------|-----------|---------------------------|---------------------|
+| Flutter web + RPC | ✅ | ✅ | ✅ |
+| Serverpod streams (WS) | ✅ | ❌ edge 403 | ✅ |
 
-For realtime Serverpod on AWS, use **ECS/Fargate + ALB** (WebSocket-capable) or
-stay on **Cloud Run** / Fly for the cheap stream demo.
+Details: [podfly `doc/aws.md`](https://github.com/127thousand/podfly/blob/main/doc/aws.md).  
+Next AWS stream path: [ECS Fargate + ALB sketch](https://github.com/127thousand/podfly/blob/main/doc/specs/2026-07-21-aws-ecs-realtime-sketch.md).
 
 ## Deploy
 

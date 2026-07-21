@@ -3,7 +3,21 @@
 | Example | What it proves |
 |---------|----------------|
 | [**api_only**](api_only/) | Serverpod API on **App Runner** (Docker → ECR) |
-| [**realtime_monolith**](realtime_monolith/) | Flutter web + API in **one** service (nginx monolith). **RPC works; WebSockets do not** (App Runner Envoy 403) |
+| [**realtime_monolith**](realtime_monolith/) | Flutter web + API in **one** service (nginx monolith). **RPC works; WebSockets do not** |
+
+## WebSockets on AWS
+
+**App Runner does not support WebSockets.** The managed edge (Envoy) returns
+**HTTP 403** on `Upgrade: websocket` before the container. Envoy *can* do WS in
+general, but App Runner does not expose Envoy config (no customer toggle).
+
+| Path | RPC | Streams (WS) |
+|------|-----|----------------|
+| App Runner (`host: aws`) | ✅ | ❌ |
+| Cloud Run | ✅ | ✅ (`gcp/realtime_monolith`) |
+| **ECS Fargate + ALB** (planned) | ✅ | ✅ — [sketch](https://github.com/127thousand/podfly/blob/main/doc/specs/2026-07-21-aws-ecs-realtime-sketch.md) |
+
+Full write-up: [podfly `doc/aws.md`](https://github.com/127thousand/podfly/blob/main/doc/aws.md).
 
 ## Prerequisites
 
