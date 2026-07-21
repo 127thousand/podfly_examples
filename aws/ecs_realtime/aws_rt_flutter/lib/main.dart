@@ -9,8 +9,8 @@ late final Client client;
 
 /// Resolve API base URL for this app.
 ///
-/// On Flutter web in the App Runner monolith image, the UI and API share one
-/// origin (nginx → Serverpod). Prefer that over baked-in localhost / placeholders.
+/// On Flutter web in the ECS monolith image, the UI and API share one origin
+/// (ALB → nginx → Serverpod). Prefer that over baked-in localhost / placeholders.
 Future<String> resolveServerUrl() async {
   final fromEnvOrAsset = await getServerUrl();
   if (kIsWeb) {
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Serverpod realtime on App Runner',
+      title: 'Serverpod realtime on ECS + ALB',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -61,7 +61,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _nameController = TextEditingController(text: 'App Runner');
+  final _nameController = TextEditingController(text: 'ECS');
   String? _hello;
   String? _helloError;
   final _ticks = <String>[];
@@ -113,17 +113,8 @@ class _HomePageState extends State<HomePage> {
         },
         onError: (Object e) {
           if (!mounted) return;
-          final msg = '$e';
-          // App Runner's edge (Envoy) rejects WebSocket upgrades with 403.
-          final hint = msg.toLowerCase().contains('403') ||
-                  msg.toLowerCase().contains('websocket') ||
-                  msg.toLowerCase().contains('failed')
-              ? '\n\nNote: AWS App Runner does not support WebSockets '
-                  '(edge returns 403). Use Cloud Run / Fly for streams, '
-                  'or ECS+ALB on AWS.'
-              : '';
           setState(() {
-            _streamError = '$msg$hint';
+            _streamError = '$e';
             _streaming = false;
           });
         },
@@ -151,15 +142,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Serverpod · App Runner monolith'),
+        title: const Text('Serverpod · ECS Fargate + ALB'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
           Text(
-            'One App Runner service: nginx serves Flutter web and proxies '
-            'API + WebSockets to Serverpod on localhost:8081.',
+            'ECS Fargate behind an Application Load Balancer: nginx serves '
+            'Flutter web and proxies API + WebSockets to Serverpod on '
+            'localhost:8081. (Unlike App Runner, ALB supports WebSocket upgrades.)',
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           const SizedBox(height: 24),

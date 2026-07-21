@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-# App Runner sets PORT (default 8080). nginx must listen on it.
+# Container/ALB port (default 8080). nginx must listen on it.
 PORT="${PORT:-8080}"
 sed -i "s/listen 8080;/listen ${PORT};/" /etc/nginx/conf.d/default.conf
 
@@ -16,5 +16,5 @@ while [ "$i" -lt 60 ]; do
   i=$((i + 1))
   sleep 0.25
 done
-# App Runner health checks hit $PORT → nginx.
+# ALB target health checks hit $PORT → nginx.
 exec nginx -g 'daemon off;'

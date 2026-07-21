@@ -1,9 +1,9 @@
-# App Runner monolith: Flutter web (static) + Serverpod API/WebSockets
+# ECS Fargate + ALB monolith: Flutter web + Serverpod API/WebSockets
 # nginx :8080  →  static files  |  proxy → Serverpod :8081
 #
 # Build from this directory (monorepo leaf):
-#   docker build --platform linux/amd64 -t aws-rt .
-# podfly sets App Runner StartCommand=/app/start.sh
+#   docker build --platform linux/amd64 -t aws-ecs-rt .
+# ALB routes to container port 8080 (start.sh).
 
 # ── Flutter web ──────────────────────────────────────────────
 FROM ghcr.io/cirruslabs/flutter:stable AS flutter
@@ -22,7 +22,7 @@ RUN printf '%s\n' \
   > pubspec.yaml
 WORKDIR /app/aws_rt_flutter
 # Do not bake SERVER_URL: main.dart uses same-origin (Uri.base) on web when
-# assets/config.json still points at localhost (App Runner monolith).
+# assets/config.json still points at localhost (ECS monolith uses Uri.base).
 RUN flutter pub get && \
     flutter build web --release --base-href /
 
@@ -71,6 +71,6 @@ COPY deploy/start.sh /app/start.sh
 RUN chmod +x /app/start.sh \
     && rm -f /etc/nginx/conf.d/default.conf.bak 2>/dev/null || true
 
-# App Runner port 8080 (nginx). Serverpod is internal on 8081.
+# ALB → port 8080 (nginx). Serverpod is internal on 8081.
 EXPOSE 8080
 ENTRYPOINT ["/app/start.sh"]

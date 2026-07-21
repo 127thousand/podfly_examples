@@ -32,13 +32,12 @@ curl -i -H 'Connection: Upgrade' -H 'Upgrade: websocket' \
 - AWS docs: HTTP/1.0–1.1, **120s** request timeout, stateless request model.
 - Roadmap [Support web sockets #13](https://github.com/aws/apprunner-roadmap/issues/13): closed not planned.
 
-| Feature | Cloud Run | App Runner (this example) | ECS + ALB (planned) |
-|---------|-----------|---------------------------|---------------------|
+| Feature | Cloud Run | App Runner (this example) | ECS + ALB |
+|---------|-----------|---------------------------|-----------|
 | Flutter web + RPC | ✅ | ✅ | ✅ |
-| Serverpod streams (WS) | ✅ | ❌ edge 403 | ✅ |
+| Serverpod streams (WS) | ✅ | ❌ edge 403 | ✅ ([ecs_realtime](../ecs_realtime/)) |
 
-Details: [podfly `doc/aws.md`](https://github.com/127thousand/podfly/blob/main/doc/aws.md).  
-Next AWS stream path: [ECS Fargate + ALB sketch](https://github.com/127thousand/podfly/blob/main/doc/specs/2026-07-21-aws-ecs-realtime-sketch.md).
+Details: [podfly `doc/aws.md`](https://github.com/127thousand/podfly/blob/main/doc/aws.md).
 
 ## Deploy
 

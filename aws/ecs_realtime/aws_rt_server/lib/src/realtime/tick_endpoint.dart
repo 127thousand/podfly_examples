@@ -4,7 +4,7 @@ import 'package:serverpod/serverpod.dart';
 
 /// Realtime demo: server → client WebSocket stream of clock ticks.
 ///
-/// No Redis needed on a single App Runner instance (in-process stream).
+/// No Redis needed on a single ECS task (in-process stream).
 class TickEndpoint extends Endpoint {
   /// Yields a tick every [intervalMs] milliseconds until the client cancels.
   Stream<String> clock(Session session, {int intervalMs = 1000}) async* {

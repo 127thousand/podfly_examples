@@ -36,7 +36,7 @@ class EndpointGreeting extends _i1.EndpointRef {
 
 /// Realtime demo: server → client WebSocket stream of clock ticks.
 ///
-/// No Redis needed on a single App Runner instance (in-process stream).
+/// No Redis needed on a single ECS task (in-process stream).
 /// {@category Endpoint}
 class EndpointTick extends _i1.EndpointRef {
   EndpointTick(_i1.EndpointCaller caller) : super(caller);

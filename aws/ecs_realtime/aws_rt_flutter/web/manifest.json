@@ -1,6 +1,6 @@
 {
-    "name": "gcr_rt_flutter",
-    "short_name": "gcr_rt_flutter",
+    "name": "aws_ecs_rt",
+    "short_name": "aws_ecs_rt",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

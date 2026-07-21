@@ -7,7 +7,7 @@ import 'src/generated/endpoints.dart';
 void run(List<String> args) async {
   final pod = Serverpod(args, Protocol(), Endpoints());
 
-  // Flutter web is served by nginx in the App Runner monolith image.
+  // Flutter web is served by nginx in the ECS monolith image (behind ALB).
   // API + WebSockets listen on the port configured in production.yaml (8081).
 
   await pod.start();
