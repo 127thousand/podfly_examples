@@ -1,0 +1,11 @@
+# Cloud Run monolith: nginx on $PORT (8080) → static Flutter + proxy to API :8081
+# publicHost is patched by podfly after first deploy.
+apiServer:
+  port: 8081
+  publicHost: localhost
+  publicPort: 443
+  publicScheme: https
+
+sessionLogs:
+  consoleEnabled: true
+  persistentEnabled: false

@@ -1,0 +1,46 @@
+# Cloud Run MONOLITH: Flutter web + Serverpod API + WebSockets
+# One container: nginx (:8080) serves UI and proxies API/WS → Serverpod (:8081)
+#
+# Cheap GCP path (stateless; no GCE Terraform). Single-instance streams need no Redis.
+
+host: cloud_run
+mode: monolith
+name: gcr_rt
+server: gcr_rt_server
+flutter: gcr_rt_flutter
+
+cloud_run:
+  service: podfly-gcr-realtime
+  # Set your GCP project id (or: gcloud config set project …)
+  project: YOUR_GCP_PROJECT
+  region: us-central1
+  allow_unauthenticated: true
+  memory: 1Gi
+  cpu: "1"
+  min_instances: 0
+  max_instances: 3
+  # Long-lived WebSocket streams
+  timeout_seconds: 3600
+  session_affinity: true
+
+database:
+  provider: none
+
+web:
+  enabled: true
+  # Same-origin after deploy; placeholder until first `podfly deploy`
+  api_url: https://placeholder.a.run.app/
+  server_url_define: SERVER_URL
+  patch_bootstrap: true
+  write_headers: true
+  base_href: /
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"realtime"}'
+    expect_status: 200
+  web:
+    path: /
+    expect_status: 200
