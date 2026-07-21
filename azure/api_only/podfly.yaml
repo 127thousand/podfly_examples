@@ -1,0 +1,39 @@
+# Azure Container Apps API-only (stateless Serverpod)
+# Flow: docker build linux/amd64 → ACR → containerapp create/update
+
+host: azure
+mode: monolith
+name: azure_api_only
+server: azure_api_only_server
+flutter: azure_api_only_flutter
+
+azure:
+  app: podfly-azure-api-only
+  # resource_group defaults to {app}-rg
+  # environment defaults to {app}-env
+  # registry defaults to sanitized app name (alphanumeric)
+  location: eastus
+  cpu: "0.5"
+  memory: "1.0Gi"
+  port: 8080
+  min_replicas: 0
+  max_replicas: 3
+  platform: linux/amd64
+
+database:
+  provider: none
+
+web:
+  enabled: false
+  server_url_define: SERVER_URL
+  api_url: https://placeholder.azurecontainerapps.io/
+  patch_bootstrap: true
+  write_headers: true
+  base_href: /
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"azure"}'
+    expect_status: 200

@@ -1,0 +1,44 @@
+# Azure Container Apps MONOLITH: Flutter web + Serverpod API + WebSockets
+# One container: nginx (:8080) serves UI and proxies API/WS → Serverpod (:8081)
+#
+# Container Apps supports WebSocket upgrades (unlike AWS App Runner).
+
+host: azure
+mode: monolith
+name: azure_rt
+server: azure_rt_server
+flutter: azure_rt_flutter
+
+azure:
+  app: podfly-azure-rt
+  # resource_group defaults to {app}-rg
+  # environment defaults to {app}-env
+  location: eastus
+  cpu: "0.5"
+  memory: "1.0Gi"
+  port: 8080
+  min_replicas: 0
+  max_replicas: 3
+  platform: linux/amd64
+
+database:
+  provider: none
+
+web:
+  enabled: true
+  # Same-origin after deploy; placeholder until first `podfly deploy`
+  api_url: https://placeholder.azurecontainerapps.io/
+  server_url_define: SERVER_URL
+  patch_bootstrap: true
+  write_headers: true
+  base_href: /
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"azure-rt"}'
+    expect_status: 200
+  web:
+    path: /
+    expect_status: 200

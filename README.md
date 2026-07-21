@@ -20,6 +20,10 @@ podfly_examples/
     api_only/           # API-only → App Runner
     realtime_monolith/  # Flutter + RPC on App Runner (no WS)
     ecs_realtime/       # Flutter + RPC + WebSocket streams → ECS Fargate + ALB
+  azure/
+    README.md           # ★ Container Apps notes
+    api_only/           # API-only → Azure Container Apps
+    realtime_monolith/  # Flutter web + API + WebSocket streams
   digitalocean/         # (planned)
 ```
 
@@ -40,6 +44,16 @@ Render **requires a GitHub/GitLab repo URL**. It does not deploy from a bare loc
 → **[aws/README.md](aws/README.md)** — App Runner (HTTP) vs **ECS + ALB** (streams).
 
 App Runner does **not** support WebSockets. Use `aws/ecs_realtime` for Serverpod streams.
+
+## Azure
+
+→ **[azure/README.md](azure/README.md)** — Container Apps (Docker → ACR).
+
+```bash
+cd azure/api_only
+podfly deploy --api --yes --smoke
+# when done: az group delete --name <resource_group> --yes --no-wait
+```
 
 ## Quick start
 
