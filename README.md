@@ -15,6 +15,9 @@ podfly_examples/
     README.md           # ★ Cloud Run notes (one-port monolith)
     api_only/           # API-only → Cloud Run (cheap serverless)
     realtime_monolith/  # Flutter web + API + WebSocket streams (nginx monolith)
+  aws/
+    README.md
+    api_only/           # API-only → App Runner (ECR image)
   digitalocean/         # (planned)
 ```
 
@@ -49,6 +52,11 @@ cd gcp/realtime_monolith
 # set cloud_run.project in podfly.yaml
 podfly deploy --yes --smoke
 # when done: gcloud run services delete podfly-gcr-realtime --region us-central1 --quiet
+
+# AWS App Runner API-only
+cd aws/api_only
+podfly deploy --api --yes --smoke
+# when done: aws apprunner delete-service --service-arn … (see aws/api_only/README)
 ```
 
 ## Official easy button

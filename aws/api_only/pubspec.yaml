@@ -1,0 +1,11 @@
+name: _
+publish_to: none
+
+environment:
+  sdk: '^3.10.3'
+
+workspace:
+  - aws_api_only_client
+  - aws_api_only_server
+  - aws_api_only_flutter
+

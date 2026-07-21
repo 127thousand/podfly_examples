@@ -1,0 +1,40 @@
+# AWS App Runner API-only (stateless Serverpod)
+# Flow: docker build linux/amd64 → ECR → apprunner create/update-service
+
+host: aws
+mode: monolith
+name: aws_api_only
+server: aws_api_only_server
+flutter: aws_api_only_flutter
+
+aws:
+  service: podfly-aws-api-only
+  region: us-east-1
+  # App Runner CPU units / memory MB (paired values)
+  cpu: "1024"
+  memory: "2048"
+  port: 8080
+  # ecr_repository defaults to service name
+  ecr_access_role: AppRunnerECRAccessRole
+  platform: linux/amd64
+  # Explicit start (App Runner is unreliable with shell ENTRYPOINT alone)
+  start_command: /app/entrypoint.sh
+
+
+database:
+  provider: none
+
+web:
+  enabled: false
+  server_url_define: SERVER_URL
+  api_url: https://placeholder.awsapprunner.com/
+  patch_bootstrap: true
+  write_headers: true
+  base_href: /
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"aws"}'
+    expect_status: 200
