@@ -18,6 +18,7 @@ podfly_examples/
   aws/
     README.md
     api_only/           # API-only → App Runner (ECR image)
+    realtime_monolith/  # Flutter web + API + WebSocket streams (nginx monolith)
   digitalocean/         # (planned)
 ```
 
