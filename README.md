@@ -11,6 +11,8 @@ podfly_examples/
     api_postgres/       # API + Render Postgres
     api_and_static/     # API + Flutter web static site
   railway/              # (planned)
+  gcp/
+    api_only/           # API-only → Cloud Run (cheap serverless)
   digitalocean/         # (planned)
 ```
 

@@ -1,0 +1,9 @@
+apiServer:
+  port: 8080
+  publicHost: podfly-gcr-api-only-xdxufg3z7q-uc.a.run.app
+  publicPort: 443
+  publicScheme: https
+
+sessionLogs:
+  consoleEnabled: true
+  persistentEnabled: false

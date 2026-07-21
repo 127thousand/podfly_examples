@@ -1,6 +1,6 @@
 apiServer:
   port: 8080
-  publicHost: localhost
+  publicHost: podfly-render-web-api.onrender.com
   publicPort: 443
   publicScheme: https
 
