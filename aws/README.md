@@ -3,7 +3,7 @@
 | Example | What it proves |
 |---------|----------------|
 | [**api_only**](api_only/) | Serverpod API on **App Runner** (Docker → ECR) |
-| [**realtime_monolith**](realtime_monolith/) | Flutter web + API + **WebSocket streams** (nginx monolith) |
+| [**realtime_monolith**](realtime_monolith/) | Flutter web + API in **one** service (nginx monolith). **RPC works; WebSockets do not** (App Runner Envoy 403) |
 
 ## Prerequisites
 

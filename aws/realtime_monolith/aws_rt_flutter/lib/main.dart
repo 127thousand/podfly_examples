@@ -113,8 +113,17 @@ class _HomePageState extends State<HomePage> {
         },
         onError: (Object e) {
           if (!mounted) return;
+          final msg = '$e';
+          // App Runner's edge (Envoy) rejects WebSocket upgrades with 403.
+          final hint = msg.toLowerCase().contains('403') ||
+                  msg.toLowerCase().contains('websocket') ||
+                  msg.toLowerCase().contains('failed')
+              ? '\n\nNote: AWS App Runner does not support WebSockets '
+                  '(edge returns 403). Use Cloud Run / Fly for streams, '
+                  'or ECS+ALB on AWS.'
+              : '';
           setState(() {
-            _streamError = '$e';
+            _streamError = '$msg$hint';
             _streaming = false;
           });
         },
