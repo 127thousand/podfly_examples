@@ -1,0 +1,11 @@
+# Monolith: Serverpod API on 8081 (nginx on 8080). Caddy terminates TLS on host.
+# publicHost is patched by podfly after first deploy.
+apiServer:
+  port: 8081
+  publicHost: localhost
+  publicPort: 443
+  publicScheme: https
+
+sessionLogs:
+  consoleEnabled: true
+  persistentEnabled: false

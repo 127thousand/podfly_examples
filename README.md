@@ -24,6 +24,10 @@ podfly_examples/
     README.md           # ★ Container Apps notes
     api_only/           # API-only → Azure Container Apps
     realtime_monolith/  # Flutter web + API + WebSocket streams
+  hetzner/
+    README.md           # ★ VPS + Caddy HTTPS notes
+    api_only/           # API-only → Hetzner Cloud (Docker/SSH)
+    realtime_monolith/  # Flutter web + API + WebSocket streams
   digitalocean/         # (planned)
 ```
 
@@ -53,6 +57,17 @@ App Runner does **not** support WebSockets. Use `aws/ecs_realtime` for Serverpod
 cd azure/api_only
 podfly deploy --api --yes --smoke
 # when done: az group delete --name <resource_group> --yes --no-wait
+```
+
+## Hetzner Cloud
+
+→ **[hetzner/README.md](hetzner/README.md)** — VPS + Docker over SSH + Caddy HTTPS.
+
+```bash
+hcloud context create … && hcloud ssh-key create …
+cd hetzner/realtime_monolith
+podfly deploy --yes --smoke
+# when done: hcloud server delete <name-or-id>
 ```
 
 ## Quick start

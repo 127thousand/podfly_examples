@@ -1,0 +1,11 @@
+name: _
+publish_to: none
+
+environment:
+  sdk: '^3.10.3'
+
+workspace:
+  - hetzner_api_only_client
+  - hetzner_api_only_server
+  - hetzner_api_only_flutter
+

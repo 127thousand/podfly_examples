@@ -1,0 +1,11 @@
+# Hetzner: container listens on 8080; Caddy terminates TLS on 443.
+# publicHost is patched by podfly after first deploy.
+apiServer:
+  port: 8080
+  publicHost: localhost
+  publicPort: 443
+  publicScheme: https
+
+sessionLogs:
+  consoleEnabled: true
+  persistentEnabled: false

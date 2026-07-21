@@ -1,0 +1,39 @@
+# Hetzner Cloud API-only (stateless Serverpod)
+# Flow: create/bind VPS → Docker over SSH → Caddy HTTPS :443 (PTR or domain)
+
+host: hetzner
+mode: monolith
+name: hetzner_api_only
+server: hetzner_api_only_server
+flutter: hetzner_api_only_flutter
+
+hetzner:
+  server_name: podfly-hetzner-demo
+  # create: true + --yes auto-creates if name not found
+  create: true
+  location: ash
+  server_type: cpx11
+  image: ubuntu-24.04
+  ssh_key: mac-default
+  port: 8080
+  https: true
+  # domain: api.example.com   # optional; else Hetzner IPv4 PTR hostname
+  platform: linux/amd64
+
+database:
+  provider: none
+
+web:
+  enabled: false
+  server_url_define: SERVER_URL
+  api_url: https://placeholder.example.com/
+  patch_bootstrap: true
+  write_headers: true
+  base_href: /
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"hetzner"}'
+    expect_status: 200

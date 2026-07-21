@@ -1,0 +1,41 @@
+# Hetzner Cloud MONOLITH: Flutter web + Serverpod + WebSockets
+# Container: nginx :8080 → static + proxy → Serverpod :8081
+# Host: Caddy :443 → container :8080 (TLS + WS)
+
+host: hetzner
+mode: monolith
+name: hetzner_rt
+server: hetzner_rt_server
+flutter: hetzner_rt_flutter
+
+hetzner:
+  server_name: podfly-hetzner-demo
+  create: true
+  location: ash
+  server_type: cpx11
+  image: ubuntu-24.04
+  ssh_key: mac-default
+  port: 8080
+  https: true
+  platform: linux/amd64
+
+database:
+  provider: none
+
+web:
+  enabled: true
+  api_url: https://placeholder.example.com/
+  server_url_define: SERVER_URL
+  patch_bootstrap: true
+  write_headers: true
+  base_href: /
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"hetzner-rt"}'
+    expect_status: 200
+  web:
+    path: /
+    expect_status: 200
