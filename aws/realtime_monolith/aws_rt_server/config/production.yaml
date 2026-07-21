@@ -2,7 +2,7 @@
 # publicHost is patched by podfly after first deploy.
 apiServer:
   port: 8081
-  publicHost: qqx5csmx2v.us-east-1.awsapprunner.com
+  publicHost: localhost
   publicPort: 443
   publicScheme: https
 
