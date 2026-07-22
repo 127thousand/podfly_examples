@@ -1,0 +1,11 @@
+name: _
+publish_to: none
+
+environment:
+  sdk: '^3.10.3'
+
+workspace:
+  - vercel_split_client
+  - vercel_split_server
+  - vercel_split_flutter
+

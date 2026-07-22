@@ -1,0 +1,40 @@
+# Fly API + Vercel Flutter web (split)
+#   podfly deploy --yes --smoke
+
+host: fly
+web_host: vercel
+mode: split
+name: vercel_split
+server: vercel_split_server
+flutter: vercel_split_flutter
+
+fly:
+  app: podfly-vercel-split-api
+  region: iad
+  config: fly.toml
+  scale_to_zero: true
+  ha: false
+
+vercel:
+  project: podfly-vercel-split-ui
+
+database:
+  provider: none
+
+web:
+  enabled: true
+  server_url_define: SERVER_URL
+  api_url: https://podfly-vercel-split-api.fly.dev/
+  patch_bootstrap: true
+  write_headers: true
+  base_href: /
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"vercel"}'
+    expect_status: 200
+  web:
+    path: /
+    expect_status: 200

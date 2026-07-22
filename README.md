@@ -28,6 +28,9 @@ podfly_examples/
     README.md           # ★ VPS + Caddy HTTPS notes
     api_only/           # API-only → Hetzner Cloud (Docker/SSH)
     realtime_monolith/  # Flutter web + API + WebSocket streams
+  vercel/
+    README.md           # ★ web_host: vercel (static Flutter)
+    split_fly/          # Fly API + Vercel Flutter web
   digitalocean/         # (planned)
 ```
 
