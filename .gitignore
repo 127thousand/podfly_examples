@@ -8,3 +8,4 @@
 **/config/passwords.yaml
 **/config/*.podfly.bak
 .DS_Store
+**/.netlify/
