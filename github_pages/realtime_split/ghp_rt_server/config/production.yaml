@@ -1,0 +1,10 @@
+# Fly API public host is patched by podfly after first deploy.
+apiServer:
+  port: 8080
+  publicHost: podfly-gpages-rt-api.fly.dev
+  publicPort: 443
+  publicScheme: https
+
+sessionLogs:
+  consoleEnabled: true
+  persistentEnabled: false

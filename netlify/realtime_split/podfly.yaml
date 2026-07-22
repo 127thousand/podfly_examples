@@ -1,0 +1,41 @@
+# Fly API (+ WebSockets) + Netlify Flutter web — split realtime
+#   podfly deploy --yes --smoke
+
+host: fly
+web_host: netlify
+mode: split
+name: netlify_rt
+server: netlify_rt_server
+flutter: netlify_rt_flutter
+
+fly:
+  app: podfly-netlify-rt-api
+  region: iad
+  config: fly.toml
+  scale_to_zero: true
+  ha: false
+
+netlify:
+  site: podfly-netlify-rt-ui
+
+database:
+  provider: none
+
+web:
+  enabled: true
+  server_url_define: SERVER_URL
+  # Flutter client (RPC + streams) targets Fly, not the Netlify origin
+  api_url: https://podfly-netlify-rt-api.fly.dev/
+  patch_bootstrap: true
+  write_headers: true
+  base_href: /
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"netlify-rt"}'
+    expect_status: 200
+  web:
+    path: /
+    expect_status: 200

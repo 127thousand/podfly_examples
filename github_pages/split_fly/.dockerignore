@@ -1,0 +1,10 @@
+.dart_tool/
+**/build/
+**/.dart_tool/
+.git/
+**/.git/
+vercel_split_flutter/
+build/
+**/*.md
+**/.agents/
+**/.cursor/

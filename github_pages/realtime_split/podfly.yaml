@@ -1,0 +1,40 @@
+# Fly API (+ WebSockets) + GitHub Pages Flutter web — split realtime
+#   podfly deploy --yes --smoke
+
+host: fly
+web_host: github_pages
+mode: split
+name: ghp_rt
+server: ghp_rt_server
+flutter: ghp_rt_flutter
+
+fly:
+  app: podfly-gpages-rt-api
+  region: iad
+  config: fly.toml
+  scale_to_zero: true
+  ha: false
+
+github_pages:
+  repo: podfly-gpages-rt-ui
+
+database:
+  provider: none
+
+web:
+  enabled: true
+  server_url_define: SERVER_URL
+  api_url: https://podfly-gpages-rt-api.fly.dev/
+  base_href: /podfly-gpages-rt-ui/
+  patch_bootstrap: true
+  write_headers: true
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"ghp-rt"}'
+    expect_status: 200
+  web:
+    path: /
+    expect_status: 200

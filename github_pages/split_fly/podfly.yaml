@@ -1,0 +1,40 @@
+# Fly API + GitHub Pages Flutter web (split)
+#   podfly deploy --yes --smoke
+
+host: fly
+web_host: github_pages
+mode: split
+name: ghp_split
+server: ghp_split_server
+flutter: ghp_split_flutter
+
+fly:
+  app: podfly-gpages-api
+  region: iad
+  config: fly.toml
+  scale_to_zero: true
+  ha: false
+
+github_pages:
+  repo: podfly-ghp-split-ui
+
+database:
+  provider: none
+
+web:
+  enabled: true
+  server_url_define: SERVER_URL
+  api_url: https://podfly-gpages-api.fly.dev/
+  base_href: /podfly-ghp-split-ui/
+  patch_bootstrap: true
+  write_headers: true
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"ghp"}'
+    expect_status: 200
+  web:
+    path: /
+    expect_status: 200

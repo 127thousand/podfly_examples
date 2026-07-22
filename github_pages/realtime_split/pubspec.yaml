@@ -1,0 +1,10 @@
+name: _
+publish_to: none
+
+environment:
+  sdk: '^3.10.3'
+
+workspace:
+  - ghp_rt_client
+  - ghp_rt_server
+  - ghp_rt_flutter

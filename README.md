@@ -32,10 +32,31 @@ podfly_examples/
     README.md           # ★ web_host: vercel (static Flutter)
     split_fly/          # Fly API + Vercel Flutter web
     realtime_split/     # Fly API + WS + Vercel Flutter (streams)
+  netlify/
+    README.md           # ★ web_host: netlify (static Flutter)
+    split_fly/          # Fly API + Netlify Flutter web
+    realtime_split/     # Fly API + WS + Netlify Flutter (streams)
+  github_pages/
+    README.md           # ★ web_host: github_pages (static Flutter)
+    split_fly/          # Fly API + GitHub Pages Flutter web
+    realtime_split/     # Fly API + WS + GitHub Pages Flutter (streams)
   digitalocean/         # (planned)
 ```
 
 Each **leaf folder** is a full Serverpod monorepo root (`podfly deploy` cwd).
+
+## Static web CDNs (`web_host`)
+
+Vercel, Netlify, and GitHub Pages examples only host **Flutter web**. Serverpod
+API (+ WebSockets for `realtime_split`) runs on **Fly**. Point `SERVER_URL` at
+the API host — never open streams against the CDN origin.
+
+| `web_host` | CLI | Example dirs |
+|------------|-----|----------------|
+| `cloudflare` | `wrangler` | (default; see CF Pages in podfly docs) |
+| `vercel` | `vercel` | `vercel/split_fly`, `vercel/realtime_split` |
+| `netlify` | `netlify` | `netlify/split_fly`, `netlify/realtime_split` |
+| `github_pages` | `gh` + `git` | `github_pages/split_fly`, `github_pages/realtime_split` |
 
 ## Render (important)
 

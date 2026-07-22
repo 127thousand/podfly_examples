@@ -1,0 +1,11 @@
+name: _
+publish_to: none
+
+environment:
+  sdk: '^3.10.3'
+
+workspace:
+  - netlify_rt_client
+  - netlify_rt_server
+  - netlify_rt_flutter
+

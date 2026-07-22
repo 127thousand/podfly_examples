@@ -1,0 +1,40 @@
+# Fly API + Netlify Flutter web (split)
+#   podfly deploy --yes --smoke
+
+host: fly
+web_host: netlify
+mode: split
+name: netlify_split
+server: netlify_split_server
+flutter: netlify_split_flutter
+
+fly:
+  app: podfly-netlify-split-api
+  region: iad
+  config: fly.toml
+  scale_to_zero: true
+  ha: false
+
+netlify:
+  site: podfly-netlify-split-ui
+
+database:
+  provider: none
+
+web:
+  enabled: true
+  server_url_define: SERVER_URL
+  api_url: https://podfly-netlify-split-api.fly.dev/
+  patch_bootstrap: true
+  write_headers: true
+  base_href: /
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"netlify"}'
+    expect_status: 200
+  web:
+    path: /
+    expect_status: 200

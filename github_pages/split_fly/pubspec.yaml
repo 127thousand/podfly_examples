@@ -1,0 +1,10 @@
+name: _
+publish_to: none
+
+environment:
+  sdk: '^3.10.3'
+
+workspace:
+  - ghp_split_client
+  - ghp_split_server
+  - ghp_split_flutter
