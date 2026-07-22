@@ -1,0 +1,13 @@
+### A chat line broadcast via session.messages (Redis PubSub when global: true).
+class: ChatMessage
+fields:
+  ### Display name of the sender.
+  author: String
+  ### Message body.
+  text: String
+  ### When the server accepted the message (UTC).
+  at: DateTime
+  ### Machine that produced this event (Fly machine id suffix).
+  serverId: String?
+  ### "hello" = WebSocket host machine; "chat" (or null) = published chat line.
+  kind: String?

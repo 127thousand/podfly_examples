@@ -1,0 +1,50 @@
+# Fly API (HA / 2 machines) + Netlify Flutter UI + Upstash Redis chat
+#   podfly deploy --yes --smoke
+#
+# Prove multi-machine PubSub: open UI in two browsers; send until a green
+# CROSS-MACHINE line (send machine ≠ WebSocket machine).
+
+host: fly
+web_host: netlify
+mode: split
+name: chat
+server: chat_server
+flutter: chat_flutter
+
+fly:
+  app: podfly-upstash-chat-api
+  region: iad
+  config: fly.toml
+  scale_to_zero: false
+  ha: true
+
+redis:
+  provider: upstash
+  upstash:
+    name: podfly-chat-redis
+    region: us-east-1
+    provision: true
+
+netlify:
+  site: podfly-upstash-chat-ui
+
+database:
+  provider: none
+
+web:
+  enabled: true
+  server_url_define: SERVER_URL
+  api_url: https://podfly-upstash-chat-api.fly.dev/
+  patch_bootstrap: true
+  write_headers: true
+  base_href: /
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"chat"}'
+    expect_status: 200
+  web:
+    path: /
+    expect_status: 200

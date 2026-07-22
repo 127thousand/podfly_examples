@@ -1,0 +1,6 @@
+chat:
+  - listen:
+  - whoami:
+  - send:
+greeting:
+  - hello:

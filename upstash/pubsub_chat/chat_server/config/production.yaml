@@ -1,0 +1,11 @@
+# Fly API public host is patched by podfly after first deploy.
+# redis: block is written by podfly when redis.provider: upstash.
+apiServer:
+  port: 8080
+  publicHost: podfly-upstash-chat-api.fly.dev
+  publicPort: 443
+  publicScheme: https
+
+sessionLogs:
+  consoleEnabled: true
+  persistentEnabled: false

@@ -40,6 +40,9 @@ podfly_examples/
     README.md           # ★ web_host: github_pages (static Flutter)
     split_fly/          # Fly API + GitHub Pages Flutter web
     realtime_split/     # Fly API + WS + GitHub Pages Flutter (streams)
+  upstash/
+    README.md           # ★ redis.provider: upstash (cache / PubSub)
+    pubsub_chat/        # Fly HA + Netlify chat + Redis (cross-machine proof)
   digitalocean/         # (planned)
 ```
 
@@ -57,6 +60,14 @@ the API host — never open streams against the CDN origin.
 | `vercel` | `vercel` | `vercel/split_fly`, `vercel/realtime_split` |
 | `netlify` | `netlify` | `netlify/split_fly`, `netlify/realtime_split` |
 | `github_pages` | `gh` + `git` | `github_pages/split_fly`, `github_pages/realtime_split` |
+
+## Upstash Redis (optional)
+
+Multi-instance **cache** and **PubSub** (`redis.provider: upstash`). Not a web host —
+pairs with Fly (or another multi-machine API) so `postMessage(..., global: true)`
+fans out across processes.
+
+→ **[upstash/README.md](upstash/README.md)** — `pubsub_chat` (2-machine CROSS-MACHINE proof).
 
 ## Render (important)
 
