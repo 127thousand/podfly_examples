@@ -1,0 +1,7 @@
+.dart_tool/
+**/build/
+**/.dart_tool/
+.git/
+vercel_rt_flutter/
+build/
+**/*.md

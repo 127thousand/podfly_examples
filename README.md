@@ -31,6 +31,7 @@ podfly_examples/
   vercel/
     README.md           # ★ web_host: vercel (static Flutter)
     split_fly/          # Fly API + Vercel Flutter web
+    realtime_split/     # Fly API + WS + Vercel Flutter (streams)
   digitalocean/         # (planned)
 ```
 

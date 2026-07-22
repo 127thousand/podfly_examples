@@ -1,0 +1,10 @@
+# Fly API public host is patched by podfly after first deploy.
+apiServer:
+  port: 8080
+  publicHost: localhost
+  publicPort: 443
+  publicScheme: https
+
+sessionLogs:
+  consoleEnabled: true
+  persistentEnabled: false
