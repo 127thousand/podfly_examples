@@ -46,12 +46,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Same light Material 3 pattern as the other host demos (Hetzner, Azure, …).
     return MaterialApp(
       title: 'Serverpod realtime on Fly + Vercel',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF000000)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-        brightness: Brightness.dark,
       ),
       home: const HomePage(),
     );
@@ -205,7 +205,10 @@ class _HomePageState extends State<HomePage> {
             (t) => Card(
               child: ListTile(
                 dense: true,
-                leading: const Icon(Icons.bolt, color: Color(0xFF000000)),
+                leading: Icon(
+                  Icons.bolt,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
                 title: Text(t, style: const TextStyle(fontFamily: 'monospace')),
               ),
             ),
@@ -223,14 +226,18 @@ class _Banner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Light pastel fill + explicit dark text (same as Hetzner/Azure demos).
+    // Do not force white text here — that is what made the cream banner unreadable.
+    final bg = ok ? Colors.green.shade100 : Colors.orange.shade100;
+    final fg = ok ? Colors.green.shade900 : Colors.orange.shade900;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: ok ? Colors.green.shade100 : Colors.orange.shade100,
+        color: bg,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Text(text),
+      child: Text(text, style: TextStyle(color: fg)),
     );
   }
 }
