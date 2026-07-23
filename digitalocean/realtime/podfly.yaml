@@ -1,0 +1,39 @@
+# DigitalOcean: API app + web app (nginx) + WebSocket streams
+#   podfly deploy --yes --smoke
+# Starter DOCR: one repo — share podfly-do-api tags rt / web
+
+host: digitalocean
+mode: monolith
+name: do_rt
+server: do_rt_server
+flutter: do_rt_flutter
+
+digitalocean:
+  app: podfly-do-rt
+  region: nyc
+  registry: ben-registry
+  api_repository: podfly-do-api
+  image_tag: rt
+  instance_size: basic-xxs
+  platform: linux/amd64
+
+database:
+  provider: none
+
+web:
+  enabled: true
+  server_url_define: SERVER_URL
+  api_url: https://REPLACE.ondigitalocean.app/
+  patch_bootstrap: true
+  write_headers: true
+  base_href: /
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"do-rt"}'
+    expect_status: 200
+  web:
+    path: /
+    expect_status: 200

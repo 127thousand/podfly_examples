@@ -1,0 +1,31 @@
+# Railway API + Railway Postgres plugin
+#   podfly deploy --api --yes --smoke
+
+host: railway
+mode: monolith
+name: railway_api_pg
+server: railway_api_pg_server
+flutter: railway_api_pg_flutter
+
+railway:
+  project: podfly-railway-api-pg
+  service: api
+  serverless: true
+
+database:
+  provider: railway_postgres
+  railway_postgres:
+    service: Postgres
+    create: true
+    connection_string_secret: DATABASE_URL
+
+web:
+  enabled: false
+  api_url: https://REPLACE.up.railway.app/
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"railway-pg"}'
+    expect_status: 200

@@ -1,0 +1,39 @@
+# DigitalOcean App Platform + Managed Postgres
+#   podfly deploy --api --yes --smoke
+# Needs: doctl + Docker + DOCR; managed PG bills independently (~small plan)
+
+host: digitalocean
+mode: monolith
+name: do_api_pg
+server: do_api_pg_server
+flutter: do_api_pg_flutter
+
+digitalocean:
+  app: podfly-do-api-pg
+  region: nyc
+  registry: ben-registry
+  # Starter DOCR: one repository — share with api_only, distinct tag
+  api_repository: podfly-do-api
+  image_tag: pg
+  instance_size: basic-xxs
+  platform: linux/amd64
+
+database:
+  provider: digitalocean_postgres
+  digitalocean_postgres:
+    cluster_name: podfly-do-api-pg-db
+    create: true
+    region: nyc1
+    size: db-s-1vcpu-1gb
+    engine_version: "16"
+
+web:
+  enabled: false
+  api_url: https://podfly-do-api-pg.ondigitalocean.app/
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"do-pg"}'
+    expect_status: 200

@@ -9,3 +9,5 @@
 **/config/*.podfly.bak
 .DS_Store
 **/.netlify/
+**/do-app.yaml
+**/do-app.web.yaml

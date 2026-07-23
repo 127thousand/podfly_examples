@@ -1,0 +1,27 @@
+# Railway API-only (no Postgres) — greeting smoke
+#   podfly deploy --api --yes --smoke
+
+host: railway
+mode: monolith
+name: railway_api
+server: railway_api_server
+flutter: railway_api_flutter
+
+railway:
+  project: podfly-railway-api
+  service: api
+  serverless: true
+
+database:
+  provider: none
+
+web:
+  enabled: false
+  api_url: https://REPLACE.up.railway.app/
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"railway"}'
+    expect_status: 200

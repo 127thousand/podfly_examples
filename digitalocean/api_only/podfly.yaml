@@ -1,0 +1,30 @@
+# DigitalOcean App Platform API-only (no managed Postgres)
+#   podfly deploy --api --yes --smoke
+# Needs: doctl + Docker + DOCR registry (ben-registry)
+
+host: digitalocean
+mode: monolith
+name: do_api
+server: do_api_server
+flutter: do_api_flutter
+
+digitalocean:
+  app: podfly-do-api
+  region: nyc
+  registry: ben-registry
+  instance_size: basic-xxs
+  platform: linux/amd64
+
+database:
+  provider: none
+
+web:
+  enabled: false
+  api_url: https://podfly-do-api.ondigitalocean.app/
+
+smoke:
+  api:
+    method: POST
+    path: /greeting/hello
+    body: '{"name":"do"}'
+    expect_status: 200

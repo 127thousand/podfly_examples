@@ -10,7 +10,11 @@ podfly_examples/
     README.md           # ★ how Render + git works (read this)
     api_postgres/       # API + Render Postgres
     api_and_static/     # API + Flutter web static site
-  railway/              # (planned)
+  railway/
+    README.md           # ★ host: railway
+    api_only/           # API-only on Railway
+    api_postgres/       # API + railway_postgres plugin
+    realtime/           # API + native web + WebSocket streams
   gcp/
     README.md           # ★ Cloud Run notes (one-port monolith)
     api_only/           # API-only → Cloud Run (cheap serverless)
@@ -43,7 +47,14 @@ podfly_examples/
   upstash/
     README.md           # ★ redis.provider: upstash (cache / PubSub)
     pubsub_chat/        # Fly HA + Netlify chat + Redis (cross-machine proof)
-  digitalocean/         # (planned)
+  supabase/
+    README.md           # ★ database.provider: supabase (managed PG)
+    notes/              # Fly API + Supabase note add/list (write + read)
+  digitalocean/
+    README.md           # ★ host: digitalocean (App Platform + DOCR)
+    api_only/           # API-only
+    api_postgres/       # API + Managed Postgres
+    realtime/           # API + web app + WebSocket streams
 ```
 
 Each **leaf folder** is a full Serverpod monorepo root (`podfly deploy` cwd).

@@ -1,0 +1,11 @@
+name: _
+publish_to: none
+
+environment:
+  sdk: '^3.10.3'
+
+workspace:
+  - do_rt_client
+  - do_rt_server
+  - do_rt_flutter
+

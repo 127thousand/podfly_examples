@@ -1,0 +1,11 @@
+name: _
+publish_to: none
+
+environment:
+  sdk: '^3.10.3'
+
+workspace:
+  - do_api_pg_client
+  - do_api_pg_server
+  - do_api_pg_flutter
+

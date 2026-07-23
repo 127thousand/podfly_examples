@@ -1,0 +1,13 @@
+**/.dart_tool/
+**/build/
+**/.git/
+**/android/
+**/ios/
+**/macos/
+**/linux/
+**/windows/
+**/*_flutter/
+**/*_client/
+**/.agents/
+**/.claude/
+**/.cursor/

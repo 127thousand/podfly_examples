@@ -1,0 +1,10 @@
+# Written by podfly — slim monorepo upload for Serverpod API image
+.serverpod/
+**/.s.PGSQL*
+**/*.sock
+.dart_tool/
+**/build/
+build/
+.git/
+railway_api_flutter/
+railway_api_client/

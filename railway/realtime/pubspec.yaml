@@ -1,0 +1,11 @@
+name: _
+publish_to: none
+
+environment:
+  sdk: '^3.10.3'
+
+workspace:
+  - railway_rt_client
+  - railway_rt_server
+  - railway_rt_flutter
+

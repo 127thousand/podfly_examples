@@ -1,0 +1,8 @@
+### A note row stored in Supabase Postgres (write + read smoke).
+class: Note
+table: note
+fields:
+  ### Note body.
+  text: String
+  ### When the row was created (UTC).
+  createdAt: DateTime
