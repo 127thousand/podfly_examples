@@ -1,4 +1,4 @@
-# Patched by podfly on deploy.
+# Patched by podfly on deploy (api publicHost + Supabase session pooler).
 apiServer:
   port: 8080
   publicHost: localhost
