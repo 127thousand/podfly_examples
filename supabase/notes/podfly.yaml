@@ -15,14 +15,18 @@ fly:
 
 netlify:
   site: podfly-supabase-notes-ui
+  site_id: a80343a5-756e-4448-bc4e-14fb51c339a1
+  public_host: podfly-supabase-notes-ui.netlify.app
 
 database:
   provider: supabase
   supabase:
     project_name: podfly-supabase-notes
+    project_ref: aglurhjcnjxcsapvdajj
     org_id: flvrnoltqvaplqtjaqgz
     region: us-east-1
     provision: true
+    host: db.aglurhjcnjxcsapvdajj.supabase.co
     database: postgres
     user: postgres
     port: 5432

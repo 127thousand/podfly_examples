@@ -2,7 +2,8 @@
 
 Flutter web on **Netlify**; Serverpod API on **Fly**; Postgres on **Supabase**.
 
-> **Live demo:** torn down after smoke (2026-07-23). Re-deploy with the steps below.
+> **Live demo (re-verified 2026-07-23):** UI + API + Supabase write/read working.  
+> Tear down when done (commands below).
 
 ## Architecture
 
