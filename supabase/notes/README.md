@@ -5,6 +5,11 @@ Flutter web on **Netlify**; Serverpod API on **Fly**; Postgres on **Supabase**.
 > **Live demo (re-verified 2026-07-23):** UI + API + Supabase write/read working.  
 > Tear down when done (commands below).
 
+| | URL |
+|--|-----|
+| **UI** | https://podfly-supabase-notes-ui.netlify.app |
+| **API** | https://podfly-supabase-notes-api.fly.dev |
+
 ## Architecture
 
 | Piece | Provider |
